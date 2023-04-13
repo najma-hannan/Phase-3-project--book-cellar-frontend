@@ -1,11 +1,17 @@
-import { Container } from "@chakra-ui/react";
+import { Button, Container, Flex, Heading, ListItem, Text, UnorderedList } from "@chakra-ui/react";
 import { useLoaderData } from "react-router-dom";
+import { allBooks } from "../../api/books";
+import { formatMoney } from "../../utils";
 
-export function loader() {
-    return [
-        { id: 1, title: "Book 1" },
-        { id: 2, title: "Book 2" },
-    ]
+export async function loader() {
+    const response = await allBooks();
+    const data = await response.json();
+
+    if (!response.ok) {
+        throw new Error(response)
+    }
+
+    return data;
 }
 
 function LibraryGallery() {
@@ -13,11 +19,25 @@ function LibraryGallery() {
 
     return (
         <Container maxW="7xl" p="8">
-            <ul>
+            <Heading as="h2" size="md">Library Collection</Heading>
+
+            <UnorderedList mt="2" spacing={4}>
                 {
-                    books.map(book => (<li key={book.id}>{book.title}</li>))
+                    books.length > 0 ?
+                        books.map(book => (<ListItem key={book.id}>
+                            <Text as="span" fontWeight={"semibold"}>{book.title}</Text> by {"  "}
+                            <Flex display={"inline-flex"} gap={2}>
+                                {book.authors.map(author => <p>{author.name}</p>)}
+                            </Flex>
+                            <Flex gap={2}>
+                                <Text as="span">Price: {formatMoney(book.price)}</Text>
+                                <Text as="span">Qty: {book.quantity}</Text>
+                            </Flex>
+                            <Button mt="1" size="sm">Add to Cart</Button>
+                        </ListItem>))
+                        : <p>We don't have books in the library yet. Come back later.</p>
                 }
-            </ul>
+            </UnorderedList>
         </Container>
     )
 
