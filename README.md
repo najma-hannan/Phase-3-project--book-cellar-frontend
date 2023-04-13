@@ -11,9 +11,9 @@ In the terminal run `npm run start` to start the application server.
 ## Features
 
 - [x] User can see a library of available books
-- [ ] User can add books to Cart
+- [x] User can add books to Cart
 - [ ] User can checkout their Cart confirming an Order
-- [ ] Provide a dummy login by specifying an email address -- Temporary solution
-- [ ] User can view a list of their orders
 - [ ] User can view a single book in it's own page
+- [ ] Provide a dummy login by specifying an email address -- Temporary solution
 - [ ] User can view reviews for a certain book and can a new review
+- [ ] User can view a list of their orders

@@ -30,7 +30,7 @@ function Home() {
                     books.length > 0 ?
                         books.map(book => (<ListItem key={book.id}>
                             <Text as="span" fontWeight={"semibold"}>{book.title}</Text> by
-                            <Flex display={"inline-flex"} gap={2}>
+                            <Flex ml="1" display={"inline-flex"} gap={2}>
                                 {book.authors.map(author => <p key={author.id}>{author.name}</p>)}
                             </Flex>
                             <Flex gap={2}>
