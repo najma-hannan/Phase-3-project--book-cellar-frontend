@@ -4,12 +4,12 @@ import { Link as RouterLink, Outlet } from "react-router-dom";
 import { CartContext } from "../../CartProvider";
 
 function CartButton() {
-    const {cart} = React.useContext(CartContext);
+    const {cartCount} = React.useContext(CartContext);
 
     return (
         <Button as={RouterLink} variant={"solid"} colorScheme="whiteAlpha" to="cart">
             <Text as="span" fontSize="lg" fontWeight={"semibold"}>Cart</Text>
-            <Text ml="1" as="span" fontSize={"xs"}>({cart.length})</Text>
+            <Text ml="1" as="span" fontSize={"xs"}>({cartCount})</Text>
         </Button>
     )
 }

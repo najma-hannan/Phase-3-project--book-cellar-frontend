@@ -23,13 +23,13 @@ function Home() {
 
     return (
         <Container maxW="7xl" p="8">
-            <Heading as="h2" size="md">Library Collection</Heading>
+            <Heading as="h2" size="lg">Library Collection</Heading>
 
             <UnorderedList mt="2" spacing={4}>
                 {
                     books.length > 0 ?
                         books.map(book => (<ListItem key={book.id}>
-                            <Text as="span" fontWeight={"semibold"}>{book.title}</Text> by {"  "}
+                            <Text as="span" fontWeight={"semibold"}>{book.title}</Text> by
                             <Flex display={"inline-flex"} gap={2}>
                                 {book.authors.map(author => <p key={author.id}>{author.name}</p>)}
                             </Flex>
