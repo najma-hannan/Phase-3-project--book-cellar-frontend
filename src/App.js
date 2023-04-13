@@ -1,6 +1,6 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Root from "./components/Root/Root";
-import Home, {loader as libraryLoader} from "./components/Home/Home";
+import Home, {loader as homeLoader} from "./components/Home/Home";
 import CartProvider from "./CartProvider";
 import Cart from "./components/Cart/Cart";
 
@@ -12,7 +12,7 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Home/>,
-        loader: libraryLoader,
+        loader: homeLoader,
       },
       {
         path: "cart",
