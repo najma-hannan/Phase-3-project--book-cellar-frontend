@@ -1,6 +1,6 @@
 import { Button, Container, Flex, Heading, ListItem, Text, UnorderedList } from "@chakra-ui/react";
 import { useLoaderData } from "react-router-dom";
-import { allBooks } from "../../api/books";
+import { allBooks } from "../../api";
 import { formatMoney } from "../../utils";
 import React from "react";
 import { CartContext } from "../../CartProvider";
