@@ -1,19 +1,18 @@
-import { Button, Container, Flex, Heading, ListItem, Text, UnorderedList } from "@chakra-ui/react";
-import { useLoaderData } from "react-router-dom";
+import { Button, Container, Flex, Heading, Link, ListItem, Text, UnorderedList } from "@chakra-ui/react";
+import { useLoaderData, Link as RouterLink } from "react-router-dom";
 import { allBooks } from "../../api";
-import { formatMoney } from "../../utils";
+import { formatMoney, joinWithAnd } from "../../utils";
 import React from "react";
 import { CartContext } from "../../CartProvider";
 
 export async function loader() {
     const response = await allBooks();
-    const data = await response.json();
 
     if (!response.ok) {
         throw new Error(response)
     }
 
-    return data;
+    return await response.json();
 }
 
 function Home() {
@@ -29,15 +28,13 @@ function Home() {
                 {
                     books.length > 0 ?
                         books.map(book => (<ListItem key={book.id}>
-                            <Text as="span" fontWeight={"semibold"}>{book.title}</Text> by
-                            <Flex ml="1" display={"inline-flex"} gap={2}>
-                                {book.authors.map(author => <p key={author.id}>{author.name}</p>)}
-                            </Flex>
+                            <Link as={RouterLink} to={`/books/${book.id}`} fontWeight={"semibold"}>{book.title}</Link> by
+                            <Text ml="1" as="span" color="gray.700">{joinWithAnd(book.authors.map(author => author.name))}</Text>
                             <Flex gap={2}>
                                 <Text as="span">Price: {formatMoney(book.price)}</Text>
                                 <Text as="span">Qty: {book.quantity}</Text>
                             </Flex>
-                            <Button onClick={() => addToCart(book)} mt="1" size="sm">Add to Cart</Button>
+                            <Button onClick={() => addToCart(book)} variant={"link"} colorScheme="blue" mt="1" size="sm">Add to Cart</Button>
                         </ListItem>))
                         : <p>We don't have books in the library yet. Come back later.</p>
                 }

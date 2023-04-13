@@ -15,7 +15,7 @@ function CartButton() {
 }
 
 function Root() {
-    return (<div>
+    return (<Flex flexDir={"column"} minH="100vh">
         <Box as="header" bg="gray.800" >
             <Flex justifyContent={"space-between"} alignItems={"center"} maxW="7xl" mx="auto" p="8">
                 <Link as={RouterLink} to="/">
@@ -25,10 +25,10 @@ function Root() {
                 <CartButton />
             </Flex>
         </Box>
-        <main>
+        <Box flex="1" as="main" bgColor={"gray.100"}>
             <Outlet />
-        </main>
-    </div>)
+        </Box>
+    </Flex>)
 }
 
 export default Root;
