@@ -1,15 +1,22 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Root from "./components/Root/Root";
-import LibraryGallery, {loader as libraryLoader} from "./components/LibraryGallery/LibraryGallery";
+import Home, {loader as libraryLoader} from "./components/Home/Home";
+import CartProvider from "./CartProvider";
+import Cart from "./components/Cart/Cart";
 
 const router = createBrowserRouter([
   {
+    path: "/",
     element: <Root />,
     children: [
       {
-        path: "/",
-        element: <LibraryGallery/>,
+        index: true,
+        element: <Home/>,
         loader: libraryLoader,
+      },
+      {
+        path: "cart",
+        element: <Cart/>,
       }
     ]
   }
@@ -17,7 +24,9 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <RouterProvider router={router} />
+    <CartProvider>
+      <RouterProvider router={router} />
+    </CartProvider>
   );
 }
 
