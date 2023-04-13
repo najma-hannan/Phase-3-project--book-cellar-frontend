@@ -12,9 +12,16 @@ In the terminal run `npm run start` to start the application server.
 
 - [x] User can see a library of available books
 - [x] User can add books to Cart
-- [ ] User can checkout their Cart confirming an Order
 - [x] User can view a single book in it's own page
-- [ ] Provide a dummy login by specifying an email address -- Temporary solution
 - [x] User can view reviews for a certain book
+- [ ] Provide a dummy login by specifying an email address -- Temporary solution
+- [ ] User can checkout their Cart confirming an Order
 - [ ] User can add a review
+- [ ] User can edit their review
+- [ ] User can delete their review
 - [ ] User can view a list of their orders
+
+### Stretch
+
+- [ ] Edit, Delete book details as inventory
+- [ ] CRUD operations for authors
