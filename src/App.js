@@ -1,15 +1,23 @@
-import { Heading, Text } from "@chakra-ui/react";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import Root from "./components/Root/Root";
+import LibraryGallery, {loader as libraryLoader} from "./components/LibraryGallery/LibraryGallery";
+
+const router = createBrowserRouter([
+  {
+    element: <Root />,
+    children: [
+      {
+        path: "/",
+        element: <LibraryGallery/>,
+        loader: libraryLoader,
+      }
+    ]
+  }
+])
 
 function App() {
   return (
-      <div>
-        <header>
-          <Heading as="h1" size="3xl">Book Cellar</Heading>
-        </header>
-        <main>
-          <Text fontSize='6xl'>We are live!!</Text>
-        </main>
-      </div>
+    <RouterProvider router={router} />
   );
 }
 
