@@ -1,9 +1,14 @@
-import { Text } from "@chakra-ui/react";
+import { Heading, Text } from "@chakra-ui/react";
 
 function App() {
   return (
       <div>
-        <Text fontSize='6xl'>We are live!!</Text>
+        <header>
+          <Heading as="h1" size="3xl">Book Cellar</Heading>
+        </header>
+        <main>
+          <Text fontSize='6xl'>We are live!!</Text>
+        </main>
       </div>
   );
 }
