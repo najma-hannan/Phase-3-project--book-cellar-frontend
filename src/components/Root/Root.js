@@ -33,18 +33,26 @@ function CartButton() {
 function Root() {
     const user = useLoaderData();
 
+    const logout = () => {
+        window.localStorage.removeItem("auth_token");
+
+        window.location.href= "/";
+    }
+
     return (<Flex flexDir={"column"} minH="100vh">
         <Box as="header" bg="gray.800" >
             <Flex justifyContent={"space-between"} alignItems={"center"} maxW="7xl" mx="auto" p="8">
-                <Link as={RouterLink} to="/">
-                    <Heading as="h1" display={"inline-block"} size="lg" color="white">Book Cellar</Heading>
-                </Link>
+                <div>
+                    <Link as={RouterLink} to="/">
+                        <Heading as="h1" display={"inline-block"} size="lg" color="teal.300">Book Cellar</Heading>
+                    </Link>
+
+                    {user && <Text ml="4" color="white" fontSize={"base"} display={"inline-block"}>Hello, {user.name}</Text>}
+                </div>
 
                 <div>
                     {
-                        user ? <>
-                            <Text mr="4" color="white" fontWeight={"semibold"} display={"inline-block"}>Hello, {user.name}</Text>
-                        </>
+                        user ? <Button color="white" mr="4" variant={"link"} onClick={logout} >Logout</Button>
                             :
                             <Button mr="4" as={RouterLink} to={"/login"} colorScheme="green">Login</Button>
                     }

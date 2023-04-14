@@ -104,7 +104,11 @@ function BookDetail() {
                     </Box>
 
                     <Box bgColor="gray.50" p={[4, 8]}>
-                        <ReviewForm bookId={book.id} />
+                        {user ? <ReviewForm bookId={book.id} user={user} />
+                        : <Button as={RouterLink} to="/login">
+                            Login to add a review
+                        </Button> }
+
                     </Box>
                 </Box>
             </Stack>
