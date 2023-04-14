@@ -3,16 +3,16 @@ import { addReview } from "../../api";
 import {useState} from "react";
 import { useRevalidator } from "react-router-dom";
 
-function ReviewForm({bookId}) {
+function ReviewForm({bookId, user}) {
     const revalidator = useRevalidator();
+
     const [comment, setComment] = useState("");
     const [rating, setRating] = useState(0);
 
     const submitReview = async (event) => {
         event.preventDefault();
 
-        // TODO: remove fixed user id
-        const response = await addReview(bookId, {user_id: 1, comment, rating});
+        const response = await addReview(bookId, {user_id: user?.id, comment, rating});
 
         if(!response.ok) {
             // !handle error
@@ -27,7 +27,7 @@ function ReviewForm({bookId}) {
 
     return (
         <form onSubmit={submitReview}>
-            <Text mb="2">User: Currently defaults to user with id 1</Text>
+            <Text mb="1" fontWeight={"semibold"} color="gray.800">{user?.name}</Text>
             <VisuallyHidden as="label" htmlFor="comment">Comment</VisuallyHidden>
             <Textarea value={comment} onChange={e => setComment(e.target.value)} id="comment" bgColor="white" placeholder='Add your review' resize={"none"} required/>
             <Box mt="2">

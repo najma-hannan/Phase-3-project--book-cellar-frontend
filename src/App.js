@@ -1,15 +1,18 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import Root from "./components/Root/Root";
+import Root, {loader as rootLoader} from "./components/Root/Root";
 import Home, {loader as homeLoader} from "./components/Home/Home";
 import BookDetail, {loader as bookDetailLoader} from "./components/BookDetail/BookDetail";
 import CartProvider from "./CartProvider";
 import Cart from "./components/Cart/Cart";
 import OrderConfirmed from "./components/OrderConfirmed/OrderConfirmed";
+import Login, {action as loginAction} from "./components/Login/Login";
 
 const router = createBrowserRouter([
   {
+    id: "root",
     path: "/",
     element: <Root />,
+    loader: rootLoader,
     children: [
       {
         index: true,
@@ -28,6 +31,11 @@ const router = createBrowserRouter([
       {
         path: "order-confirmed",
         element: <OrderConfirmed/>,
+      },
+      {
+        path: "login",
+        element: <Login/>,
+        action: loginAction,
       }
     ]
   }

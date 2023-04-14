@@ -5,10 +5,23 @@ if (!API_URL) {
     console.error("You need to provide the REACT_APP_API_URL env variable.")
 }
 
+function retrieveAuthToken() {
+    return window.localStorage.getItem("auth_token");
+}
+
 export function get(url, options = {}) {
+    const headers = {};
+
+    const authToken = retrieveAuthToken();
+
+    if(authToken) {
+        headers["Authorization"] = `Bearer ${authToken}`;
+    }
+
     return fetch(`${API_URL}/${url}`, {
         method: "GET",
-        ...options
+        headers,
+        ...options,
     });
 }
 

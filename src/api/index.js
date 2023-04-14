@@ -1,7 +1,11 @@
 import {destroy, get, post} from "./utils";
 
-export function authenticate(email) {
-    return post(`authenticate`, {email});
+export function authenticate(email, password) {
+    return post(`login`, {email, password});
+}
+
+export function profile() {
+    return get(`profile`);
 }
 
 export function allBooks(){
