@@ -2,6 +2,10 @@
 
 Phase 3 Sinatra-React project frontend application source code. An web applicaiton that allows users to browse a library of books. The app enables the user to view a list of books, select a book and add to cart, to make an order, and purchase the items in the cart. The web application enables the user to add reviews on the various books and rate the books on a scale of one to five. The Web application allows a user to browse into a library of books from the comfort of there homes.
 
+## Live Link
+
+[https://book-cellar-frontend.onrender.com](https://book-cellar-frontend.onrender.com)
+
 ## Running the project locally
 
 Clone the project locally in your machine:
