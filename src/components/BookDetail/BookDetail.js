@@ -1,9 +1,10 @@
 import { useLoaderData, Link as RouterLink } from "react-router-dom"
 import { getBookReviews, getSingleBook } from "../../api";
-import { Box, Button, Container, Flex, Heading, Stack, Text, Link, UnorderedList, ListItem, Textarea, VisuallyHidden } from "@chakra-ui/react";
+import { Box, Button, Container, Flex, Heading, Stack, Text, Link, UnorderedList, ListItem } from "@chakra-ui/react";
 import React from "react";
 import { CartContext } from "../../CartProvider";
 import { formatMoney, joinWithAnd, pluralize } from "../../utils";
+import ReviewForm from "../ReviewForm/ReviewForm";
 
 export async function loader({ params }) {
     const [bookResponse, reviewsResponse] = await Promise.all([
@@ -65,9 +66,9 @@ function BookDetail() {
                         <Heading as="h2" size="md" color="gray.700" fontWeight={"semibold"} >Reviews</Heading>
                         {
                             reviews.length > 0 ?
-                                <UnorderedList mt="4" listStyleType={"none"} spacing="2" marginStart={0}>
+                                <UnorderedList mt="4" listStyleType={"none"} spacing="4" marginStart={0}>
                                     { reviews.map(review => (
-                                        <ListItem key={review.id} border="1px" p="2" rounded="md" >
+                                        <ListItem key={review.id} border="1px" p="2" rounded="sm" >
                                             <p>Reviewer: {review.user.name}</p>
                                             <p>{review.comment}</p>
                                             <Text color="blue.700" fontSize="sm">Rated {review.rating} {" "} {pluralize(review.rating, "star", "stars")}</Text>
@@ -81,14 +82,7 @@ function BookDetail() {
                     </Box>
 
                     <Box bgColor="gray.50" p={[4, 8]}>
-                        <form action="">
-                            <Text mb="2">User: Currently defaults to user with id 1</Text>
-                            <VisuallyHidden as="label" htmlFor="comment">Comment</VisuallyHidden>
-                            <Textarea id="comment" bgColor="white" placeholder='Add your review' resize={"none"} />
-                            <Flex mt="4" justifyContent={"end"}>
-                                <Button type="submit" size="sm" variant="solid" colorScheme="teal">Add Review</Button>
-                            </Flex>
-                        </form>
+                        <ReviewForm bookId={book.id}/>
                     </Box>
                 </Box>
             </Stack>

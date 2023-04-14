@@ -16,6 +16,10 @@ export function getBookReviews(bookId) {
     return get(`books/${bookId}/reviews`);
 }
 
+export function addReview(bookId, data) {
+    return post(`books/${bookId}/reviews`, data);
+}
+
 export function createOrder(userId = 1, orderItems) {
     return post(`users/${userId}/orders`, {"order_items": orderItems});
 }
