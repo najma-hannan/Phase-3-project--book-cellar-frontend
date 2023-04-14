@@ -1,21 +1,23 @@
 import { Button, Container, Flex, Heading, Text, UnorderedList, ListItem, Stack } from "@chakra-ui/react";
 import React from "react";
 import { CartContext } from "../../CartProvider";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useRouteLoaderData } from "react-router-dom";
 import { formatMoney } from "../../utils";
 import { createOrder } from "../../api";
 
 function Cart() {
+    const user = useRouteLoaderData("root");
+
     const navigate = useNavigate();
+
     const { cart, clearCart, removeFromCart, cartTotal } = React.useContext(CartContext);
 
     async function checkOutOrder() {
         // todo: remove fixed user_id
-        const userId = 1;
-        const orderItems = cart.map(cartItem => ({book_id: cartItem.id, quantity: cartItem.cart_quantity}));
-        const response = await createOrder(userId, orderItems);
+        const orderItems = cart.map(cartItem => ({ book_id: cartItem.id, quantity: cartItem.cart_quantity }));
+        const response = await createOrder(user?.id, orderItems);
 
-        if(!response.ok) {
+        if (!response.ok) {
             console.error(response);
             throw new Error(response);
         }
@@ -24,7 +26,7 @@ function Cart() {
 
         clearCart();
 
-        navigate("/order-confirmed", {state: newOrder});
+        navigate("/order-confirmed", { state: newOrder });
     }
 
     return (
@@ -56,7 +58,13 @@ function Cart() {
                         <Text fontWeight={"semibold"} fontSize={"lg"}>Total Price: {formatMoney(cartTotal)}</Text>
 
                         <div>
-                            <Button variant="solid" colorScheme="green" onClick={checkOutOrder}>Checkout Order</Button>
+
+                            {user ?
+                                <Button variant="solid" colorScheme="green" onClick={checkOutOrder}>Checkout Order</Button> :
+                                <Button as={Link} to="/login" variant={"outline"}>
+                                    Login to checkout
+                                </Button>}
+
                         </div>
                     </Stack>
                     : <Flex flexDir={"column"} mt="4" rounded={"md"} shadow={"base"} border="1px" alignItems={"center"} justifyContent={"center"} p="8">
