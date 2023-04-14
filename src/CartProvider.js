@@ -7,7 +7,7 @@ function CartProvider({ children }) {
 
     React.useEffect(() => {
         // TODO: remove this
-        console.log(cart.map(item => ({ title: item.title, qty: item.cart_quantity })));
+        // console.log(cart.map(item => ({ title: item.title, qty: item.cart_quantity })));
 
         // TODO: persist to local storage
     }, [cart]);

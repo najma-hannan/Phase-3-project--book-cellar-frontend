@@ -1,4 +1,4 @@
-import {get, post} from "./utils";
+import {destroy, get, post} from "./utils";
 
 export function authenticate(email) {
     return post(`authenticate`, {email});
@@ -18,6 +18,10 @@ export function getBookReviews(bookId) {
 
 export function addReview(bookId, data) {
     return post(`books/${bookId}/reviews`, data);
+}
+
+export function deleteReview(bookId, reviewId) {
+    return destroy(`books/${bookId}/reviews/${reviewId}`);
 }
 
 export function createOrder(userId, orderItems) {

@@ -1,5 +1,5 @@
-import { useLoaderData, Link as RouterLink } from "react-router-dom"
-import { getBookReviews, getSingleBook } from "../../api";
+import { useLoaderData, Link as RouterLink, useRevalidator } from "react-router-dom"
+import { deleteReview, getBookReviews, getSingleBook } from "../../api";
 import { Box, Button, Container, Flex, Heading, Stack, Text, Link, UnorderedList, ListItem } from "@chakra-ui/react";
 import React from "react";
 import { CartContext } from "../../CartProvider";
@@ -27,11 +27,27 @@ export async function loader({ params }) {
 
 
 function BookDetail() {
+    const revalidator = useRevalidator();
+
     const [book, reviews] = useLoaderData();
 
-    console.log({ book, reviews });
-
     const { addToCart } = React.useContext(CartContext);
+
+    async function deleteReviewEvent(bookId, reviewId) {
+
+        if(!window.confirm("Are you sure?")) {
+            return;
+        }
+
+        const response = await deleteReview(bookId, reviewId);
+
+        if(!response.ok) {
+            console.error(response);
+            throw new Error(response);
+        }
+
+        revalidator.revalidate();
+    }
 
     return (
         <Container maxW="4xl" px={{ base: "4", md: "6", lg: "8" }} pt="8" pb="20">
@@ -72,6 +88,8 @@ function BookDetail() {
                                             <p>Reviewer: {review.user.name}</p>
                                             <p>{review.comment}</p>
                                             <Text color="blue.700" fontSize="sm">Rated {review.rating} {" "} {pluralize(review.rating, "star", "stars")}</Text>
+
+                                            <Button onClick={() => deleteReviewEvent(book.id, review.id)} mt="2" variant="link" colorScheme="red" size="sm">Delete</Button>
                                         </ListItem>
                                     )) }
                                 </UnorderedList> :
