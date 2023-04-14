@@ -36,12 +36,12 @@ function Login() {
                 <Stack spacing="2">
                     <div>
                         <FormLabel htmlFor="email">Email</FormLabel>
-                        <Input id="email" name="email" type="email" required/>
+                        <Input id="email" name="email" type="email" defaultValue={"user@example.net"} required/>
                         {errors?.email && <Text display={"inline-block"} color="text" fontSize={"sm"}>{errors?.email}</Text>}
                     </div>
                     <div>
                         <FormLabel htmlFor="password">Password</FormLabel>
-                        <Input id="password" name="password" type="password" required/>
+                        <Input id="password" name="password" type="password" defaultValue={"pass"} required/>
                     </div>
                 </Stack>
                 <Flex mt="4" justifyContent={"end"}>
