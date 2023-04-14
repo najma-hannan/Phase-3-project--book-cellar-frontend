@@ -4,6 +4,7 @@ import Home, {loader as homeLoader} from "./components/Home/Home";
 import BookDetail, {loader as bookDetailLoader} from "./components/BookDetail/BookDetail";
 import CartProvider from "./CartProvider";
 import Cart from "./components/Cart/Cart";
+import OrderConfirmed from "./components/OrderConfirmed/OrderConfirmed";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
       {
         path: "cart",
         element: <Cart/>,
+      },
+      {
+        path: "order-confirmed",
+        element: <OrderConfirmed/>,
       }
     ]
   }
